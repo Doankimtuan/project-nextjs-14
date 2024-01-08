@@ -42,9 +42,11 @@ export default function RootLayout({
           fontHeading.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <MainNav />
-          {children}
+          <div className="w-full flex justify-center ">
+            <div className="max-w-[1336px] w-full relative">{children}</div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

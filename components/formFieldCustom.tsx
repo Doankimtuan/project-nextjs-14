@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from './ui/form';
 import { ControllerRenderProps, useFormContext } from 'react-hook-form';
+import { Input } from './ui/input';
 
 interface IFormField {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ interface IFormField {
   name: string;
   label: string;
   description?: string;
+  disabled?: boolean;
 }
 
 const FormFieldCustom = ({
@@ -23,16 +25,17 @@ const FormFieldCustom = ({
   name,
   label,
   description,
+  disabled,
 }: IFormField) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   const renderChildren = useCallback(
     (field: any) => {
       return React.cloneElement(children as any, {
         ...field,
       });
-
-      // return React.Children.map(children, (child: any) => {
-      // });
     },
     [children],
   );
@@ -41,11 +44,12 @@ const FormFieldCustom = ({
     <FormField
       control={control}
       name={name}
+      disabled={disabled}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>{renderChildren(field)}</FormControl>
-          <FormDescription>{description}</FormDescription>
+          {!errors[name] && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

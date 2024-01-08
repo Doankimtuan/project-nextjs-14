@@ -1,7 +1,13 @@
-import Image from 'next/image';
+import OrderButton from '@/components/orderButton';
+import TabsOrder from '@/components/tabsOrder';
 
 const HomePage = () => {
-  return <div></div>;
+  return (
+    <>
+      <OrderButton />
+      <TabsOrder />
+    </>
+  );
 };
 
 export default HomePage;

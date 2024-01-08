@@ -1,120 +1,78 @@
 'use client';
 
-import * as React from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { toast } from '@/components/ui/use-toast';
-import { Icons } from '@/components/icons';
-import { userAuthSchema } from '@/lib/auth';
+import { FIELD_DATA_AUTH_FORM, userAuthSchema } from '@/lib/auth';
 import FormFieldCustom from './formFieldCustom';
+import { Button, buttonVariants } from './ui/button';
+import { Icons } from './icons';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 type FormData = z.infer<typeof userAuthSchema>;
 
+const MODE = {
+  SIGN_IN: 'sign_in',
+  ENTER_NAME: 'enter_name',
+};
+
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const methods = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
+    defaultValues: {
+      [FIELD_DATA_AUTH_FORM.USER_NAME]: '',
+      [FIELD_DATA_AUTH_FORM.DISPLAY_NAME]: '',
+    },
   });
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = methods;
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
-  const searchParams = useSearchParams();
+  const { control, handleSubmit, formState } = methods;
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [formMode, setFormMode] = useState<string>(MODE.SIGN_IN);
 
   async function onSubmit(data: FormData) {
-    setIsLoading(true);
-
-    const signInResult = await signIn('email', {
-      email: data.email.toLowerCase(),
-      redirect: false,
-      callbackUrl: searchParams?.get('from') || '/dashboard',
-    });
-
-    setIsLoading(false);
-
-    if (!signInResult?.ok) {
-      return toast({
-        title: 'Something went wrong.',
-        description: 'Your sign in request failed. Please try again.',
-        variant: 'destructive',
-      });
-    }
-
-    return toast({
-      title: 'Check your email',
-      description: 'We sent you a login link. Be sure to check your spam too.',
-    });
+    console.log({ data });
+    setFormMode(MODE.ENTER_NAME);
   }
-
-  console.log(getValues());
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
-            <div className="grid gap-1">
+            <FormFieldCustom
+              control={control}
+              name={FIELD_DATA_AUTH_FORM.USER_NAME}
+              label="User name"
+              description="Please use a username similar to tuan.doan."
+              disabled={formMode === MODE.ENTER_NAME}
+            >
+              <Input />
+            </FormFieldCustom>
+          </div>
+          {formMode === MODE.ENTER_NAME && (
+            <div className="grid gap-2">
               <FormFieldCustom
                 control={control}
-                name="userName"
-                label="User name"
+                name={FIELD_DATA_AUTH_FORM.DISPLAY_NAME}
+                label="Display name"
+                description="You can fill in anything you want, up to 200 characters. If you leave it blank, the username will be used."
               >
-                <Input placeholder="aaaaaaa" />
+                <Input />
               </FormFieldCustom>
-
-              {errors?.email && (
-                <p className="px-1 text-xs text-red-600">
-                  {errors.email.message}
-                </p>
-              )}
             </div>
-            {/* <button className={cn(buttonVariants())} disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign In with Email
-          </button>
-        </div>
-      </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <button
-        type="button"
-        className={cn(buttonVariants({ variant: 'outline' }))}
-        onClick={() => {
-          setIsGitHubLoading(true);
-          signIn('github');
-        }}
-        disabled={isLoading || isGitHubLoading}
-      >
-        {isGitHubLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
-        )}{' '}
-        Github
-      </button> */}
+          )}
+          <div className="flex justify-center pt-4">
+            <Button disabled={isLoading} className="w-40" type="submit">
+              {isLoading && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              {formMode === MODE.SIGN_IN ? 'Sign In' : 'Finish'}
+            </Button>
           </div>
         </form>
       </FormProvider>
