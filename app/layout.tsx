@@ -2,7 +2,9 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Inter as FontSans, Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import './globals.css';
+import '@/styles/globals.css';
+import '@/styles/mdx.css';
+import '@/styles/editor.css';
 import { ThemeProvider } from '@/components/themeProvider';
 import MainNav from '@/components/mainNav';
 
@@ -30,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head />
       <body
         suppressHydrationWarning={true}

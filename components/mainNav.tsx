@@ -5,6 +5,7 @@ import { Menu } from './menu';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { CommandDialog } from './command';
+import { UserAuthForm } from './userAuthForm';
 
 const MainNav = () => {
   const [isOpenLogin, setIsOpenLogin] = useState<boolean>(false);
@@ -36,7 +37,7 @@ const MainNav = () => {
         open={isOpenLogin}
         onOpenChange={() => setIsOpenLogin(false)}
       >
-        <div>login</div>
+        <UserAuthForm />
       </CommandDialog>
     </header>
   );
