@@ -23,7 +23,9 @@ import {
   Twitter,
   User,
   X,
+  Pencil,
   type XIcon as LucideIcon,
+  XIcon,
 } from 'lucide-react';
 
 export type Icon = typeof LucideIcon;
@@ -69,4 +71,6 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
+  edit: Pencil,
+  remove: XIcon,
 };

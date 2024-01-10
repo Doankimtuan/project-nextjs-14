@@ -12,29 +12,23 @@ import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import TableUserOrder from './tableUserOrder';
+import Link from 'next/link';
 
 const TabsOrder = () => {
   return (
     <Tabs defaultValue="group_1" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full grid-cols-1">
         <TabsTrigger value="group_1">Group 1</TabsTrigger>
-        <TabsTrigger value="group_2">Group 2</TabsTrigger>
+        {/* <TabsTrigger value="group_2">Group 2</TabsTrigger> */}
       </TabsList>
       <TabsContent value="group_1">
         <Card>
           <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you are done.
-              asdhasidasd ashdajsdas da sdaiosdosodas dajsdjasdas djasod
-            </CardDescription>
+            <CardTitle>Tiệm Ăn Cô Duyên - Cơm, Bò Kho & Mì Xá Xíu</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <TableUserOrder />
           </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
         </Card>
       </TabsContent>
       <TabsContent value="group_2">

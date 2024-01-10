@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 const OrderButton = () => {
   return (
-    <div className="flex justify-end mb-6">
+    <div className="flex justify-end mb-6 mr-3">
       <Button>
         <Icons.pizza className="mr-2 h-4 w-4" />
         Order

@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from './ui/table';
+import { Icons } from './icons';
 
 const TableUserOrder = () => {
   const invoices = [
@@ -22,14 +23,14 @@ const TableUserOrder = () => {
 
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-1">No.</TableHead>
-          <TableHead className="w-[200px]">name</TableHead>
-          <TableHead className="w-[200px]">Dish</TableHead>
+          <TableHead className="w-1/5">name</TableHead>
+          <TableHead className="w-1/5">Dish</TableHead>
           <TableHead>Note</TableHead>
           <TableHead className="w-4">Price</TableHead>
+          <TableHead className="w-[80px]">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -40,6 +41,18 @@ const TableUserOrder = () => {
             <TableCell>{invoice.dish}</TableCell>
             <TableCell>{invoice.note}</TableCell>
             <TableCell>{invoice.price}</TableCell>
+            <TableCell>
+              <div className="flex justify-between content-center">
+                <Icons.edit
+                  size={18}
+                  className="cursor-pointer hover:text-sky-600"
+                />
+                <Icons.remove
+                  size={18}
+                  className="cursor-pointer hover:text-sky-600"
+                />
+              </div>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
