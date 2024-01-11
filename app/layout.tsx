@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 import '@/styles/globals.css';
 import '@/styles/mdx.css';
 import '@/styles/editor.css';
-import { ThemeProvider } from '@/components/themeProvider';
+import { ThemeProvider } from '@/components/theme-provider';
 import MainNav from '@/components/mainNav';
 
 const inter = Inter({ subsets: ['latin'] });

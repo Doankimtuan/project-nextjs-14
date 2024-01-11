@@ -5,7 +5,7 @@ import { Menu } from './menu';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { CommandDialog } from './command';
-import { UserAuthForm } from './userAuthForm';
+import { UserAuthForm } from './sign-in-form';
 
 const MainNav = () => {
   const [isOpenLogin, setIsOpenLogin] = useState<boolean>(false);

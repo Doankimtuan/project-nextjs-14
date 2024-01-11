@@ -8,7 +8,7 @@ import * as z from 'zod';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { FIELD_DATA_AUTH_FORM, userAuthSchema } from '@/lib/auth';
-import FormFieldCustom from './formFieldCustom';
+import FormFieldCustom from './form-field-custom';
 import { Button, buttonVariants } from './ui/button';
 import { Icons } from './icons';
 

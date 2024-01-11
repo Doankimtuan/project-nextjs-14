@@ -1,5 +1,5 @@
-import OrderButton from '@/components/orderButton';
-import TabsOrder from '@/components/tabsOrder';
+import OrderButton from '@/components/order-button';
+import TabsOrder from '@/components/tabs-order';
 
 const HomePage = () => {
   return (
