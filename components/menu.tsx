@@ -16,11 +16,8 @@ interface MainNavProps {
 
 export function Menu({ items, children }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
-  console.log({ segment });
 
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
-
-  console.log({ items });
 
   return (
     <div className="flex gap-6 md:gap-10">

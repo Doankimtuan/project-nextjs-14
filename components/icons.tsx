@@ -26,6 +26,7 @@ import {
   Pencil,
   type XIcon as LucideIcon,
   XIcon,
+  ShoppingBag,
 } from 'lucide-react';
 
 export type Icon = typeof LucideIcon;
@@ -52,6 +53,7 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  shoppingBag: ShoppingBag,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
